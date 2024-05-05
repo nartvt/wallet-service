@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+package ico.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/indikay/wallet-service/api/ico/v1;v1";
+
+service ICOService {
+  // Sends a greeting
+  rpc GetICOInfo (google.protobuf.Empty) returns (GetICOInfoResponse) {
+    option (google.api.http) = {
+      get: "/api/ico/v1/round"
+    };
+  }
+
+  rpc GetBuyICOUserHistory (GetBuyICOUserHistoryRequest) returns (GetBuyICOUserHistoryResponse) {
+    option (google.api.http) = {
+      get: "/api/ico/v1/histories"
+    };
+  }
+
+  rpc GetCurrentRound(google.protobuf.Empty) returns (GetCurrentRoundResponse) {
+    option (google.api.http) = {
+      get: "/api/ico/v1/current"
+    };
+  }
+
+  rpc GetCoupon(GetCouponRequest) returns (GetCouponResponse) {
+    option (google.api.http) = {
+      get: "/api/ico/v1/coupon/{coupon}"
+    };
+  }
+
+  rpc AddICOCoupon(AddICOCouponRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/internal/ico/v1/coupon"
+      body: "*"
+    };
+  }
+}
+
+
+message ICOInfo {
+  int32 round_id = 1;
+  string round_name = 2;
+  string price = 3;
+  string num_token = 4;
+  string price_gap = 5;
+}
+
+message GetICOInfoResponse {
+  int64 code = 1;
+  string msg = 2;
+  string msg_key = 3;
+  repeated ICOInfo data = 4;
+}
+
+
+message ICORound {
+  int32 round_id = 1;
+  string round_name = 2;
+  int32 sub_round = 3;
+  string price = 4;
+  string bought_token = 5;
+  string total_token = 6;
+  google.protobuf.Timestamp end_at = 7;
+}
+
+message GetCurrentRoundResponse {
+  int64 code = 1;
+  string msg = 2;
+  string msg_key = 3;
+  ICORound data = 4;
+}
+
+message AddICOCouponRequest {
+  string user_id = 1;
+  string coupon = 2;
+  string reward = 3;
+  string cashback = 4;
+}
+
+message GetCouponRequest {
+  string coupon = 1;
+}
+
+message GetCouponResponse {
+  int64 code = 1;
+  string msg = 2;
+  string msg_key = 3;
+  Coupon data = 4;
+}
+
+message Coupon {
+  string user_id = 1;
+  string coupon = 2;
+  string reward = 3;
+  string cash_back = 4;
+}
+
+
+message GetBuyICOUserHistoryRequest {
+  string next = 1;
+  int32 limit = 2;
+}
+
+message GetBuyICOUserHistoryResponse {
+  message Data {
+    string full_name = 1;
+    string email = 2;
+    string num_token = 3;
+    int32 order = 4;
+    string time = 5;
+    string stack = 6;
+  }
+
+  int64 code = 1;
+  string msg = 2;
+  string msg_key = 3;
+  int32 total = 4;
+  repeated Data data = 5;
+  string next = 6;
+}

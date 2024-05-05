@@ -1,0 +1,58 @@
+package constant
+
+import (
+	"os"
+)
+
+const (
+	WALLET_TYPE_SYSTEM = "SYSTEM"
+	WALLET_TYPE_USER   = "USER"
+	WALLET_TYPE_REWARD = "REWARD"
+
+	TokenSymbolBUSD string = "BUSD"
+	TokenSymbolUSDT string = "USDT"
+	TokenSymbolUSDC string = "USDC"
+	TokenSymbolIND  string = "IND"
+
+	SymbolUSD string = "USD"
+	SymbolVND string = "VND"
+
+	WALLET_SYS_INCOME          = "SYS_INCOME"
+	WALLET_ICO                 = "ICO"
+	WALLET_SYS_DEPOSIT         = "SYS_DEPOSIT"
+	WALLET_SYS_ICO_BACKUP      = "SYS_ICO"
+	WALLET_SYS_ICO_REWARD      = "SYS_ICO_REWARD"
+	WALLET_SYS_REFERRAL_REWARD = "SYS_REFERRAL_REWARD"
+	WALLET_SYS_TOKEN           = "SYS_TOKENNOMIC"
+	WALLET_SYS_TEAM            = "SYS_TEAM"
+	WALLET_SYS_MARKETING       = "SYS_MARKETING"
+	WALLET_SYS_LIQUIDITY       = "SYS_LIQUIDITY"
+	WALLET_SYS_RESERVE         = "SYS_RESERVE"
+	WALLET_SYS_PARTNER         = "SYS_PARTNER"
+	WALLET_SYS_ADVISOR         = "SYS_ADVISOR"
+	WALLET_SYS_ECOFUND         = "SYS_ECOFUND"
+	WalletSysMarketingReward   = "SYS_MARKETING_REWARD"
+
+	// Price map
+	VND_IND = "550"
+	USD_VND = "25000"
+
+	DEFAULT_LIMIT = 50
+	// SUBROUND_LIFETIME = 60 * 24 // mins ,  7 days = 10080 mins
+
+	// ERROR
+	ERROR_INTERNAL           = "INTERNAL_SERVER"
+	ERROR_NOT_FOUND          = "NOT_FOUND"
+	ERROR_BAD_REQUEST        = "BAD_REQUEST"
+	ERROR_BALANCE_NOT_ENOUGH = "BALANCE_NOT_ENOUGH"
+	ERROR_LOCK               = "ICO_INPROCESS"
+
+	ICO_LOCK = "ICO_LOCK"
+
+	TRANS_INTERNAL = "INTERNAL"
+)
+
+var (
+	AvailableSDKTokenSymbol = []string{TokenSymbolUSDT, TokenSymbolBUSD, TokenSymbolUSDC}
+	SUBROUND_LIFETIME       = os.Getenv("IND_SUBROUND_TIME")
+)

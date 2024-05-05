@@ -1,0 +1,31 @@
+syntax = "proto3";
+package example.api;
+
+option go_package = "github.com/indikay/go-core/example/internal/conf;conf";
+
+import "google/protobuf/duration.proto";
+
+import "core.proto";
+
+message Bootstrap {
+  core.conf.Server server = 1;
+  Data data = 2;
+}
+
+message Data {
+  core.conf.Database database = 1;
+  core.conf.Redis redis = 2;
+
+  Nats nats = 3;
+  Client profile = 4;
+}
+
+message Nats {
+  string nats_host     = 1;
+  string topic_publish_transaction = 2;
+}
+
+message Client {
+  string addr = 1;
+  google.protobuf.Duration timeout = 2;
+}

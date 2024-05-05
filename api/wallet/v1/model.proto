@@ -1,0 +1,187 @@
+syntax = "proto3";
+
+package wallet.v1;
+
+option go_package = "github.com/indikay/wallet-service/api/wallet/v1;v1";
+
+import "google/protobuf/timestamp.proto";
+
+enum SymbolType {
+  IND = 0;
+  VND = 1;
+  USDT = 2;
+}
+
+enum WalletType {
+  USER = 0;
+  REWARD = 1;
+}
+
+enum UsdtType {
+  USDT_TYPE = 0;
+}
+
+message UserWallet {
+  SymbolType symbol = 1;
+  string balance = 2;
+  WalletType wallet_type = 3;
+}
+
+message UserWalletResponse {
+  int64 code = 1;
+  string msg = 2;
+  string msg_key = 3;
+  repeated UserWallet data = 4;
+}
+
+message Transaction {
+  string id = 1;
+	string user_id = 2;
+  string type = 3;
+  SymbolType symbol = 4;
+  string amount = 5;
+  int32 created_at = 6;
+  string status = 7;
+  string trans_in_out = 8;
+}
+
+message GetWalletHistoryRequest {
+  string next = 1;
+  int32 limit = 2;
+}
+
+message GetWalletHistoryResponse {
+  message Data {
+    repeated Transaction histories = 1;
+    string next = 2;
+  }
+
+  int64 code = 1;
+  string msg = 2;
+  string msg_key = 3;
+  Data data = 4;
+}
+
+message ChargeFeeRequest {
+  SymbolType symbol = 1;
+  string amount = 2;
+  string source_id = 3;
+  UsdtType type_fee = 4;
+}
+
+
+message ChargeFeeResponse {
+  int64 code = 1;
+  string msg = 2;
+  string msg_key = 3;
+  string fee = 4;
+}
+
+message DepositRequest {
+  SymbolType symbol = 1;
+  string amount = 2;
+  string source_id = 3;
+  string ico_type = 4;
+}
+
+
+message DepositResponse {
+  message Data {
+    string amount = 1;
+    SymbolType symbol = 2;
+    string rate = 3;
+  }
+  int64 code = 1;
+  string msg = 2;
+  string msg_key = 3;
+  Data data = 4;
+}
+
+message BuyICORequest {
+  SymbolType symbol = 1;
+  string amount = 2;
+  string source_id = 3;
+  string coupon = 4;
+}
+
+
+message BuyICOResponse {
+  message Data {
+    string amount = 1;
+    SymbolType symbol = 2;
+    string rate = 3;
+  }
+  int64 code = 1;
+  string msg = 2;
+  string msg_key = 3;
+  Data data = 4;
+}
+
+message SubsciptionRequest {
+  SymbolType symbol = 1;
+  string amount = 2;
+  string source_id = 3;
+}
+
+message SubsciptionResponse {
+  int64 code = 1;
+  string msg = 2;
+  string msg_key = 3;
+}
+
+message ReferralRewardRequest {
+  SymbolType symbol = 1;
+  string amount = 2;
+  string source_id = 3;
+}
+
+
+message ReferralRewardResponse {
+  int64 code = 1;
+  string msg = 2;
+  string msg_key = 3;
+}
+
+message MarketingRewardRequest {
+  SymbolType symbol = 1;
+  string amount = 2;
+  string source_id = 3;
+}
+
+message MarketingRewardResponse {
+  message Data {
+    string id = 1;
+  }
+
+  int64 code = 1;
+  string msg = 2;
+  string msg_key = 3;
+  Data data = 4;
+}
+
+message CurrentRateRequest {
+  string symbol = 1;
+}
+
+message CurrentRate {
+  int64 code = 1;
+  string msg = 2;
+  string msg_key = 3;
+  message Data {
+      string symbol = 1;
+      string rate   = 2;
+  }
+  Data data = 4;
+}
+
+message CalcChargeFeeRequest {
+  string symbol = 1;
+  string amount = 2;
+}
+
+message CalcChargeFeeResponse {
+  int64 code = 1;
+  string msg = 2;
+  string msg_key = 3;
+  bool  is_enough = 4;
+}

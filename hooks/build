@@ -1,0 +1,10 @@
+#! /bin/bash
+
+TAG=${SOURCE_COMMIT:0:7}
+
+# DOCKER_REPO - DOCKER_TAG
+
+docker buildx build --build-arg GITHUB_ACCESS_USER="${GITHUB_ACCESS_USER}" --build-arg GITHUB_ACCESS_TOKEN="${GITHUB_ACCESS_TOKEN}" -f "${DOCKERFILE_PATH}" -t "${IMAGE_NAME}" .
+
+docker tag "${IMAGE_NAME}" "${IMAGE_NAME}-${TAG}"
+docker push "${IMAGE_NAME}-${TAG}"

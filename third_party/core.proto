@@ -1,0 +1,51 @@
+syntax = "proto3";
+package core.conf;
+
+option go_package = "github.com/indikay/go-core/conf;conf";
+
+import "google/protobuf/duration.proto";
+
+message Server {
+  message HTTP {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  message GRPC {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+
+  message AuthIntrospect{
+    bool required = 1;
+    string excludes = 2;
+    bool auto_parse = 3;
+  }
+
+  message Log {
+    string level = 1;
+    string format = 2;
+    string file = 3;
+  }
+
+  HTTP http = 1;
+  GRPC grpc = 2;
+  AuthIntrospect auth = 3;
+  Log log = 4;
+}
+
+message Database {
+  string driver = 1;
+  string source = 2;
+}
+
+message Redis {
+  string addr = 1;
+  string pass = 2;
+  bool ssl = 3;
+  int32 db = 4;
+  google.protobuf.Duration read_timeout = 5;
+  google.protobuf.Duration write_timeout = 6;
+  string username = 7;
+}

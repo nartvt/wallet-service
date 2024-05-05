@@ -1,0 +1,25 @@
+syntax = "proto3";
+package wallet.v1;
+
+option go_package = "github.com/indikay/wallet-service/api/wallet/v1;v1";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "wallet/v1/model.proto";
+
+service UserWalletService {
+	rpc GetWalletByUserId(google.protobuf.Empty) returns(wallet.v1.UserWalletResponse){
+		option (google.api.http) = {
+      			get: "/api/wallet/v1/balance"
+    		};
+	};
+  rpc GetWalletHistories(wallet.v1.GetWalletHistoryRequest) returns(wallet.v1.GetWalletHistoryResponse){
+    option (google.api.http) = {
+      			get: "/api/wallet/v1/histories"
+    		};
+  };
+  rpc GetCurrentRateBySymbol(wallet.v1.CurrentRateRequest) returns(wallet.v1.CurrentRate){};
+}
+
+
+

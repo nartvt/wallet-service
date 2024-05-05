@@ -1,0 +1,518 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: ""
+    version: 0.0.1
+paths:
+    /api/ico/v1/coupon/{coupon}:
+        get:
+            tags:
+                - ICOService
+            operationId: ICOService_GetCoupon
+            parameters:
+                - name: coupon
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ico.v1.GetCouponResponse'
+    /api/ico/v1/current:
+        get:
+            tags:
+                - ICOService
+            operationId: ICOService_GetCurrentRound
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ico.v1.GetCurrentRoundResponse'
+    /api/ico/v1/histories:
+        get:
+            tags:
+                - ICOService
+            operationId: ICOService_GetBuyICOUserHistory
+            parameters:
+                - name: next
+                  in: query
+                  schema:
+                    type: string
+                - name: limit
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ico.v1.GetBuyICOUserHistoryResponse'
+    /api/ico/v1/round:
+        get:
+            tags:
+                - ICOService
+            description: Sends a greeting
+            operationId: ICOService_GetICOInfo
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ico.v1.GetICOInfoResponse'
+    /api/wallet/v1/balance:
+        get:
+            tags:
+                - UserWalletService
+            operationId: UserWalletService_GetWalletByUserId
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/wallet.v1.UserWalletResponse'
+    /api/wallet/v1/histories:
+        get:
+            tags:
+                - UserWalletService
+            operationId: UserWalletService_GetWalletHistories
+            parameters:
+                - name: next
+                  in: query
+                  schema:
+                    type: string
+                - name: limit
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/wallet.v1.GetWalletHistoryResponse'
+    /internal/ico/v1/coupon:
+        post:
+            tags:
+                - ICOService
+            operationId: ICOService_AddICOCoupon
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ico.v1.AddICOCouponRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+    /internal/wallet/v1/charge:
+        post:
+            tags:
+                - TransactionService
+            operationId: TransactionService_ReferralReward
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/wallet.v1.ReferralRewardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/wallet.v1.ReferralRewardResponse'
+    /internal/wallet/v1/deposit:
+        post:
+            tags:
+                - TransactionService
+            operationId: TransactionService_Deposit
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/wallet.v1.DepositRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/wallet.v1.DepositResponse'
+    /internal/wallet/v1/ico:
+        post:
+            tags:
+                - TransactionService
+            operationId: TransactionService_BuyICO
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/wallet.v1.BuyICORequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/wallet.v1.BuyICOResponse'
+    /internal/wallet/v1/subscription:
+        post:
+            tags:
+                - TransactionService
+            operationId: TransactionService_Subscription
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/wallet.v1.SubsciptionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/wallet.v1.SubsciptionResponse'
+components:
+    schemas:
+        ico.v1.AddICOCouponRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                coupon:
+                    type: string
+                reward:
+                    type: string
+                cashback:
+                    type: string
+        ico.v1.Coupon:
+            type: object
+            properties:
+                userId:
+                    type: string
+                coupon:
+                    type: string
+                reward:
+                    type: string
+                cashBack:
+                    type: string
+        ico.v1.GetBuyICOUserHistoryResponse:
+            type: object
+            properties:
+                code:
+                    type: string
+                msg:
+                    type: string
+                msgKey:
+                    type: string
+                total:
+                    type: integer
+                    format: int32
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ico.v1.GetBuyICOUserHistoryResponse_Data'
+                next:
+                    type: string
+        ico.v1.GetBuyICOUserHistoryResponse_Data:
+            type: object
+            properties:
+                fullName:
+                    type: string
+                email:
+                    type: string
+                numToken:
+                    type: string
+                order:
+                    type: integer
+                    format: int32
+                time:
+                    type: string
+                stack:
+                    type: string
+        ico.v1.GetCouponResponse:
+            type: object
+            properties:
+                code:
+                    type: string
+                msg:
+                    type: string
+                msgKey:
+                    type: string
+                data:
+                    $ref: '#/components/schemas/ico.v1.Coupon'
+        ico.v1.GetCurrentRoundResponse:
+            type: object
+            properties:
+                code:
+                    type: string
+                msg:
+                    type: string
+                msgKey:
+                    type: string
+                data:
+                    $ref: '#/components/schemas/ico.v1.ICORound'
+        ico.v1.GetICOInfoResponse:
+            type: object
+            properties:
+                code:
+                    type: string
+                msg:
+                    type: string
+                msgKey:
+                    type: string
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ico.v1.ICOInfo'
+        ico.v1.ICOInfo:
+            type: object
+            properties:
+                roundId:
+                    type: integer
+                    format: int32
+                roundName:
+                    type: string
+                price:
+                    type: string
+                numToken:
+                    type: string
+                priceGap:
+                    type: string
+        ico.v1.ICORound:
+            type: object
+            properties:
+                roundId:
+                    type: integer
+                    format: int32
+                roundName:
+                    type: string
+                subRound:
+                    type: integer
+                    format: int32
+                price:
+                    type: string
+                boughtToken:
+                    type: string
+                totalToken:
+                    type: string
+                endAt:
+                    type: string
+                    format: date-time
+        wallet.v1.BuyICORequest:
+            type: object
+            properties:
+                symbol:
+                    type: integer
+                    format: enum
+                amount:
+                    type: string
+                sourceId:
+                    type: string
+                coupon:
+                    type: string
+        wallet.v1.BuyICOResponse:
+            type: object
+            properties:
+                code:
+                    type: string
+                msg:
+                    type: string
+                msgKey:
+                    type: string
+                data:
+                    $ref: '#/components/schemas/wallet.v1.BuyICOResponse_Data'
+        wallet.v1.BuyICOResponse_Data:
+            type: object
+            properties:
+                amount:
+                    type: string
+                symbol:
+                    type: integer
+                    format: enum
+                rate:
+                    type: string
+        wallet.v1.ChargeFeeRequest:
+            type: object
+            properties:
+                symbol:
+                    type: integer
+                    format: enum
+                amount:
+                    type: string
+                sourceId:
+                    type: string
+                typeFee:
+                    type: integer
+                    format: enum
+        wallet.v1.ChargeFeeResponse:
+            type: object
+            properties:
+                code:
+                    type: string
+                msg:
+                    type: string
+                msgKey:
+                    type: string
+                fee:
+                    type: string
+        wallet.v1.DepositRequest:
+            type: object
+            properties:
+                symbol:
+                    type: integer
+                    format: enum
+                amount:
+                    type: string
+                sourceId:
+                    type: string
+                icoType:
+                    type: string
+        wallet.v1.DepositResponse:
+            type: object
+            properties:
+                code:
+                    type: string
+                msg:
+                    type: string
+                msgKey:
+                    type: string
+                data:
+                    $ref: '#/components/schemas/wallet.v1.DepositResponse_Data'
+        wallet.v1.DepositResponse_Data:
+            type: object
+            properties:
+                amount:
+                    type: string
+                symbol:
+                    type: integer
+                    format: enum
+                rate:
+                    type: string
+        wallet.v1.GetWalletHistoryResponse:
+            type: object
+            properties:
+                code:
+                    type: string
+                msg:
+                    type: string
+                msgKey:
+                    type: string
+                data:
+                    $ref: '#/components/schemas/wallet.v1.GetWalletHistoryResponse_Data'
+        wallet.v1.GetWalletHistoryResponse_Data:
+            type: object
+            properties:
+                histories:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/wallet.v1.Transaction'
+                next:
+                    type: string
+        wallet.v1.ReferralRewardRequest:
+            type: object
+            properties:
+                symbol:
+                    type: integer
+                    format: enum
+                amount:
+                    type: string
+                sourceId:
+                    type: string
+        wallet.v1.ReferralRewardResponse:
+            type: object
+            properties:
+                code:
+                    type: string
+                msg:
+                    type: string
+                msgKey:
+                    type: string
+        wallet.v1.SubsciptionRequest:
+            type: object
+            properties:
+                symbol:
+                    type: integer
+                    format: enum
+                amount:
+                    type: string
+                sourceId:
+                    type: string
+        wallet.v1.SubsciptionResponse:
+            type: object
+            properties:
+                code:
+                    type: string
+                msg:
+                    type: string
+                msgKey:
+                    type: string
+        wallet.v1.Transaction:
+            type: object
+            properties:
+                id:
+                    type: string
+                userId:
+                    type: string
+                type:
+                    type: string
+                symbol:
+                    type: integer
+                    format: enum
+                amount:
+                    type: string
+                createdAt:
+                    type: integer
+                    format: int32
+                status:
+                    type: string
+                transInOut:
+                    type: string
+        wallet.v1.UserWallet:
+            type: object
+            properties:
+                symbol:
+                    type: integer
+                    format: enum
+                balance:
+                    type: string
+                walletType:
+                    type: integer
+                    format: enum
+        wallet.v1.UserWalletResponse:
+            type: object
+            properties:
+                code:
+                    type: string
+                msg:
+                    type: string
+                msgKey:
+                    type: string
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/wallet.v1.UserWallet'
+tags:
+    - name: ICOService
+    - name: TransactionService
+    - name: UserWalletService

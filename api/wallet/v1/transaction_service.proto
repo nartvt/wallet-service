@@ -1,0 +1,47 @@
+syntax = "proto3";
+package wallet.v1;
+
+option go_package = "github.com/indikay/wallet-service/api/wallet/v1;v1";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "wallet/v1/model.proto";
+
+service TransactionService {
+	rpc ChargeFee(wallet.v1.ChargeFeeRequest) returns(wallet.v1.ChargeFeeResponse){
+		option (google.api.http) = {
+			post: "/internal/wallet/v1/charge"
+			body: "*"
+		};
+	};
+
+	rpc Deposit(wallet.v1.DepositRequest) returns(wallet.v1.DepositResponse){
+		option (google.api.http) = {
+			post: "/internal/wallet/v1/deposit"
+			body: "*"
+		};
+	};
+
+	rpc BuyICO(wallet.v1.BuyICORequest) returns(wallet.v1.BuyICOResponse){
+		option (google.api.http) = {
+			post: "/internal/wallet/v1/ico"
+			body: "*"
+		};
+	};
+
+	rpc Subscription(wallet.v1.SubsciptionRequest) returns(wallet.v1.SubsciptionResponse){
+		option (google.api.http) = {
+			post: "/internal/wallet/v1/subscription"
+			body: "*"
+		};
+	};
+
+	rpc ReferralReward(wallet.v1.ReferralRewardRequest) returns(wallet.v1.ReferralRewardResponse){
+		option (google.api.http) = {
+			post: "/internal/wallet/v1/charge"
+			body: "*"
+		};
+	};
+  rpc CalcChargeFee(wallet.v1.CalcChargeFeeRequest) returns(wallet.v1.CalcChargeFeeResponse){};
+	rpc MarketingRewardInternal(wallet.v1.MarketingRewardRequest) returns(wallet.v1.MarketingRewardResponse){};
+}
